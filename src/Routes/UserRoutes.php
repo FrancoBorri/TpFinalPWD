@@ -21,7 +21,7 @@ class UserRoutes implements IRoutes
             return $response;
         })->add(new Validate());
 
-        $app->get("/apiv1/users/{id}", function (Request $request, Response $response, array $args) {
+        $app->delete("/apiv1/users/{id}", function (Request $request, Response $response, array $args) {
             $payload = json_encode(UserController::delete($args['id']));
             $response->getBody()->write($payload);
             return $response;

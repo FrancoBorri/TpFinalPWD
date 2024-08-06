@@ -16,7 +16,7 @@
     "rollback": "phpmig rollback -t 0",
     "dev": [
       "Composer\\Config::disableProcessTimeout",
-      "php -S 0.0.0.0:8080 -t public"
+      "php -S 0.0.0.0:8080 -t Public"
     ]
   },
   "authors": [

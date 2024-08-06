@@ -3,7 +3,7 @@
 declare(strict_types=1);
 require_once __DIR__ . '/../../env.php';
 
-use App\config\DBconect;
+use App\Config\DBconect;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use App\Models\Notice;
@@ -18,11 +18,11 @@ class NoticeControllerTest extends TestCase
         return [
             [
                 $notice = new Notice(
-                    id: 1,
+                    id: 0,
                     title: "Nuevo Estreno de Película: Inception",
                     author: "John Doe",
-                    content: "Película 'Inception', dirigida por     Christopher Nolan",
-                    image: null,
+                    content: "Película 'Inception', dirigida por Christopher Nolan",
+                    image: "image prove",
                     created_at: "now",
                     updated_at: "",
                     is_active: 1
@@ -34,11 +34,12 @@ class NoticeControllerTest extends TestCase
     #[DataProvider('noticeProvider')]
     public function testCreateNotice(Notice $notice): void
     {
-        $notice_serialized = $notice->serializar($notice);
+        $notice_serialized = $notice->serializar();
         $result = NoticeController::create($notice_serialized);
         $this->assertEquals(1, $result, "Notice not created successfully");
     }
 
+    #[DataProvider('noticeProvider')]
     public function testModifyNotice(Notice $notice): void
     {
         $notice_modify = $notice->serializar();
@@ -52,18 +53,20 @@ class NoticeControllerTest extends TestCase
         $this->assertEquals($notice_modify['title'], $findNotice['title']);
     }
 
+    #[DataProvider('noticeProvider')]
     public function testDeleteNotice(Notice $notice): void
     {
         $result = NoticeController::delete($this->maxItem());
         $this->assertEquals(1, $result, "Notice not deleted successfully");
     }
 
+    #[DataProvider('noticeProvider')]
     public function testFindNotice(Notice $notice): void
     {
         $id = $this->maxItem();
-        $notice_serialize['id'] = $id;
         $result = NoticeController::findOne($id);
-        $this->assertEquals(1, $result, "Notice not find successfully");
+        $this->assertIsArray($result);
+        $this->assertCount(8, $result, "Notice not find successfully");
     }
 
     public function maxItem(): int

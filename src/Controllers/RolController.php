@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Controllers;
 
@@ -10,11 +11,11 @@ class RolController extends ControllerBase
     public static function create(array $params): int
     {
         $rol = new Rol(
-            id: 0,
+            description: $params['description'],
             created_at: 'now',
             updated_at: "",
-            is_active: 1,
-            description: $params['description']
+            id: 0,
+            is_active: 1
         );
         return RolDAO::create($rol);
     }

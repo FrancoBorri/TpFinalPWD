@@ -33,7 +33,6 @@ class DBconect
             $dbh = self::connectionDB();
             $stmt = $dbh->prepare($sql);
             $stmt->execute($params);
-
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             $stmt->closeCursor();
             if (count($results) === 1) {
@@ -47,8 +46,6 @@ class DBconect
                 ]
             ];
         }
-
-
         return $results;
     }
 
@@ -56,9 +53,8 @@ class DBconect
     {
         $dbh = self::connectionDB();
         $stmt = $dbh->prepare($sql);
-        $stmt->execute(params: $params);
+        $stmt->execute($params);
         $result = $stmt->rowCount();
-
         self::$cnx = null;
         $stmt->closeCursor();
         return $result;

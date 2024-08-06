@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\DAOs;
 
-use App\config\DBconect;
+use App\Config\DBconect;
 use App\Interfaces\Iserializable;
 
 
@@ -12,26 +12,27 @@ class UserDAO extends DAO
     static function create(Iserializable $serializable): int
     {
         $user = $serializable->serializar();
-        $sql = "INSERT INTO users (username,password,email,rol)
-        VALUES(:username,:password,:email,:rol )";
+        $sql = "INSERT INTO users (username,password,email,id_rol)
+        VALUES(:username,:password,:email,:id_rol )";
         $params = [
-            ':username' => $user['username'],
+            ':username' => $user['userName'],
             ':password' => $user['password'],
             ':email' => $user['email'],
-            ':rol' => $user['rol']['id'],
+            ':id_rol' => $user['rol']['id'],
         ];
-        return $result = DBconect::write($sql, $params);
+        return DBconect::write($sql, $params);
     }
 
     static function modify(Iserializable $serializable): int
     {
         $serializable = $serializable->serializar();
-        $sql = "UPDATE users SET username = :username, password = :password, email = :email, rol = :rol WHERE id = :id";
+        $sql = "UPDATE users SET username = :username, password = :password, email = :email, id_rol = :id_rol WHERE id = :id";
         $params = [
-            ':username' => $serializable['username'],
+            ':username' => $serializable['userName'],
             ':password' => $serializable['password'],
             ':email' => $serializable['email'],
-            ':rol' => $serializable['rol']['id']
+            ':id_rol' => $serializable['rol']['id'],
+            ':id' => $serializable['id']
         ];
         return DBconect::write($sql, $params);
     }

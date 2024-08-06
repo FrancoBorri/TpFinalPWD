@@ -18,7 +18,7 @@ class FilmTest extends TestCase
                     title: "filmProve",
                     director: "Franco Borri",
                     gender: "action",
-                    releaseDate: 2005,
+                    release_date: 2005,
                     id: 0,
                     link: "linkProve",
                     image: "imageProve",

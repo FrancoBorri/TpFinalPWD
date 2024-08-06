@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'franco/composer',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => 'e8f002f2789794337bbde7a48b23b9914307e484',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -38,9 +38,9 @@
             'dev_requirement' => true,
         ),
         'franco/composer' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => 'e8f002f2789794337bbde7a48b23b9914307e484',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

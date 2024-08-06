@@ -42,18 +42,15 @@ class FilmControllerTest extends TestCase
     #[DataProvider('filmProvider')]
     public function testModifyFilm(Film $film): void
     {
-        $film_serialized = $film->serializar();
         $film->setGender("new film gender update");
         $film->setDirector("new director update");
-
+        $film_serialized = $film->serializar();
         $id = $this->maxItem();
         $film_serialized['id'] = $id;
         $result = FilmController::update($film_serialized);
         $this->assertEquals(1, $result, "film not modified successfully");
-
         $findOne = FilmController::findOne($id);
         $this->assertEquals($film_serialized['title'], $findOne['title']);
-
     }
 
     #[DataProvider('filmProvider')]

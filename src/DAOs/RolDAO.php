@@ -2,8 +2,7 @@
 
 namespace App\DAOs;
 
-use App\config\DBconect;
-use App\Models\Rol;
+use App\Config\DBconect;
 use App\Interfaces\Iserializable;
 
 class RolDAO extends DAO
@@ -15,7 +14,7 @@ class RolDAO extends DAO
         $params = [
             'description' => $parameters['description'],
         ];
-        return DBconect::write($sql, $parameters);
+        return DBconect::write($sql, $params);
     }
 
     static public function list(): array
@@ -36,7 +35,7 @@ class RolDAO extends DAO
         return DBconect::write($sql, $params);
     }
 
-    static public function delete(int $id): int
+    static public function delete(int|string $id): int
     {
         $sql = "DELETE FROM roles WHERE id = :id";
         $params = [

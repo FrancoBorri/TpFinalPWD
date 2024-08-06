@@ -21,15 +21,15 @@ class UserTest extends TestCase
                     email: "francoborri11@gmail.com",
                     password: "1234",
                     rol: new Rol(
-                        10,
+                        "admin",
                         "now",
                         "",
-                        "admin",
+                        10,
                         1
                     ),
                     id: 1,
                     create_at: "now",
-                    update_at: "",
+                    updated_at: "",
                     isActive: 1
                 )
             ]

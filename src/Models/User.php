@@ -23,13 +23,14 @@ class User extends ModelBase
         Rol     $rol,
         ?int    $id,
         string  $create_at,
-        ?string $update_at,
+        ?string $updated_at,
         int     $isActive,
-    ) {
+    )
+    {
         parent::__construct(
             id: $id,
             created_at: $create_at,
-            updated_at: $update_at,
+            updated_at: $updated_at,
             is_active: $isActive
         );
         $this->userName = $userName;
@@ -48,14 +49,15 @@ class User extends ModelBase
 
     public static function deserializar(array $serializable): self
     {
+        $rol = Rol::deserializar($serializable['rol']);
         return new self(
             userName: $serializable['userName'],
             email: $serializable['email'],
             password: $serializable['password'],
-            rol: $serializable['rol']->deserializar(),
+            rol: $rol,
             id: $serializable['id'],
             create_at: $serializable['created_at'],
-            update_at: $serializable['update_at'],
+            updated_at: $serializable['updated_at'],
             isActive: $serializable['is_active']
         );
     }

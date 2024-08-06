@@ -3,14 +3,14 @@ declare(strict_types=1);
 require_once __DIR__ . '/../../env.php';
 
 use PHPUnit\Framework\TestCase;
-use App\config\DBconect;
+use App\Config\DBconect;
 use App\Controllers\RolController;
 
 class RolControllerTest extends TestCase
 {
     public function testCreateRol(): void
     {
-        $params = ['description' => 'admin'];
+        $params = ['description' => 'administrator test'];
         $result = RolController::create($params);
         $this->assertEquals(1, $result, 'Rol not created successfully');
     }
@@ -30,7 +30,7 @@ class RolControllerTest extends TestCase
 
     public function lastItem(): int
     {
-        $sql = 'SELECT MAX(id) id from Roles';
+        $sql = 'SELECT MAX(id) id from roles';
         $max = DBConect::read($sql);
         return $max['id'];
     }

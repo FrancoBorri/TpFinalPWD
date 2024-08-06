@@ -3,7 +3,7 @@
 declare(strict_types=1);
 require_once __DIR__ . '/../../env.php';
 
-use App\config\DBConect;
+use App\Config\DBConect;
 use App\Controllers\UserController;
 use App\Models\User;
 use PHPUnit\Framework\TestCase;
@@ -17,19 +17,19 @@ class UserControllerTest extends TestCase
         return [
             [
                 new User(
-                    userName: "fborri",
-                    email: "francoborri11@gmail.com",
-                    password: "1234",
+                    userName: "fborriEma1234567",
+                    email: "francoborri647567@gmail.com",
+                    password: "1234567",
                     rol: new Rol(
-                         10,
+                        'admin',
                         "now",
                         "",
-                        "admin",
+                        1,
                         1
                     ),
-                    id: 1,
+                    id: 0,
                     create_at: "now",
-                    update_at: "",
+                    updated_at: "",
                     isActive: 1
                 )
             ]
@@ -47,17 +47,25 @@ class UserControllerTest extends TestCase
     #[dataProvider("UserProvider")]
     public function testModifyUser(User $user): void
     {
-        $user_serialized = $user->serializar();
         $user->setPassword("123456789");
-        $user->setEmail("fborri@gmail.com");
+        $user->setEmail("fborri2025@gmail.com");
+        $user_serialized = $user->serializar();
         $result = UserController::update($user_serialized);
         $this->assertEquals(1, $result, "User not update successfully");
     }
 
+    #[dataProvider("UserProvider")]
     public function testDeleteUser(User $user): void
     {
         $user_serialized = $user->serializar();
-        $result = UserController::delete($user_serialized['userName']);
+        $result = UserController::delete($user_serialized['id']);
         $this->assertEquals(1, $result, "User not delete successfully");
+    }
+
+    public function maxItem(): int
+    {
+        $sql = "SELECT MAX(id) id FROM users";
+        $idMax = DBconect::read($sql);
+        return $idMax['id'];
     }
 }
